@@ -3,7 +3,7 @@
 
 
 - [Classes](#classes)
-  - [Class: default](#class-default)
+  - [Class: Vector2](#class-vector2)
     - [Hierarchy](#hierarchy)
     - [Implements](#implements)
     - [Table of contents](#table-of-contents)
@@ -25,15 +25,15 @@
 # Classes
 
 
-<a name="classesdefaultmd"></a>
+<a name="classesvector2md"></a>
 
-[@aliser/vector2](#readmemd) / [Exports](#modulesmd) / default
+[@aliser/vector2](#readmemd) / [Exports](#modulesmd) / Vector2
 
-## Class: default
+## Class: Vector2
 
 ### Hierarchy
 
-* **default**
+* **Vector2**
 
 ### Implements
 
@@ -84,7 +84,7 @@
 
 #### constructor
 
-\+ **new default**(`x`: *number*, `y`: *number*): [*default*](#classesdefaultmd)
+\+ **new Vector2**(`x`: *number*, `y`: *number*): [*Vector2*](#classesvector2md)
 
 Creates a new Vector2 instance with the components set to those of arguments, respectively.
 
@@ -95,11 +95,11 @@ Name | Type |
 `x` | *number* |
 `y` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:37
 
-\+ **new default**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+\+ **new Vector2**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Creates a new Vector2 instance with the components of that instance equal to the corresponding components of the given Vector2 instance, respectively.
 
@@ -107,13 +107,13 @@ Creates a new Vector2 instance with the components of that instance equal to the
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:42
 
-\+ **new default**(`xy`: *number*): [*default*](#classesdefaultmd)
+\+ **new Vector2**(`xy`: *number*): [*Vector2*](#classesvector2md)
 
 Creates a new Vector2 instance with both components of that instance equal to 'xy'.
 
@@ -123,15 +123,15 @@ Name | Type |
 ------ | ------ |
 `xy` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:46
 
-\+ **new default**(): [*default*](#classesdefaultmd)
+\+ **new Vector2**(): [*Vector2*](#classesvector2md)
 
 Creates a new Vector2 instance with both components of that instance equal to 0.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:50
 
@@ -257,7 +257,7 @@ Defined in: index.ts:91
 
 #### add
 
-▸ **add**(`delta`: *number*): [*default*](#classesdefaultmd)
+▸ **add**(`delta`: *number*): [*Vector2*](#classesvector2md)
 
 Adds 'delta' to the both components of this Vector2 instance.
 
@@ -267,11 +267,11 @@ Name | Type |
 ------ | ------ |
 `delta` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:161
 
-▸ **add**(`deltaX`: *number*, `deltaY`: *number*): [*default*](#classesdefaultmd)
+▸ **add**(`deltaX`: *number*, `deltaY`: *number*): [*Vector2*](#classesvector2md)
 
 Adds 'deltaX' and 'deltaY' to the components of this Vector2 instance, respectively.
 
@@ -282,11 +282,11 @@ Name | Type |
 `deltaX` | *number* |
 `deltaY` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:165
 
-▸ **add**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **add**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Adds to the components of this Vector2 instance the corresponding components of the given Vector2 instance, respectively.
 
@@ -294,9 +294,9 @@ Adds to the components of this Vector2 instance the corresponding components of 
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:169
 
@@ -304,11 +304,11 @@ ___
 
 #### ceil
 
-▸ **ceil**(): [*default*](#classesdefaultmd)
+▸ **ceil**(): [*Vector2*](#classesvector2md)
 
 Rounds both components of this Vector2 instance to the nearest larger integer.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:431
 
@@ -316,15 +316,15 @@ ___
 
 #### clamp
 
-▸ **clamp**(): [*default*](#classesdefaultmd)
+▸ **clamp**(): [*Vector2*](#classesvector2md)
 
 Defines a range from which both components of this Vector2 instance can take a value, and tries to fit those components into this range, which starts from 0 and ends at 1.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:359
 
-▸ **clamp**(`upperBound`: *number*): [*default*](#classesdefaultmd)
+▸ **clamp**(`upperBound`: *number*): [*Vector2*](#classesvector2md)
 
 Defines a range from which both components of this Vector2 instance can take a value, and tries to fit those components into this range, which starts from 0 and ends at 'upperBound'.
 
@@ -334,11 +334,11 @@ Name | Type |
 ------ | ------ |
 `upperBound` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:363
 
-▸ **clamp**(`lowerBound`: *number*, `upperBound`: *number*): [*default*](#classesdefaultmd)
+▸ **clamp**(`lowerBound`: *number*, `upperBound`: *number*): [*Vector2*](#classesvector2md)
 
 Defines a range from which both components of this Vector2 instance can take a value, and tries to fit those components into this range, which starts from 'lowerBound' and ends at 'upperBound'.
 
@@ -349,11 +349,11 @@ Name | Type |
 `lowerBound` | *number* |
 `upperBound` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:367
 
-▸ **clamp**(`lowerBoundForX`: *number*, `upperBoundForX`: *number*, `lowerBoundForY`: *number*, `upperBoundForY`: *number*): [*default*](#classesdefaultmd)
+▸ **clamp**(`lowerBoundForX`: *number*, `upperBoundForX`: *number*, `lowerBoundForY`: *number*, `upperBoundForY`: *number*): [*Vector2*](#classesvector2md)
 
 Defines two ranges from which each components of this Vector2 instance can take a value, and tries to fit those components into the defined ranges, respectively: range 1 from 'lowerBoundForX' to 'upperBoundForX', range 2 from 'lowerBoundForY' to 'upperBoundForY'.
 
@@ -366,7 +366,7 @@ Name | Type |
 `lowerBoundForY` | *number* |
 `upperBoundForY` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:371
 
@@ -374,9 +374,9 @@ ___
 
 #### copy
 
-▸ **copy**(): [*default*](#classesdefaultmd)
+▸ **copy**(): [*Vector2*](#classesvector2md)
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 a new Vector2 instance created with both components of that instance equal to the corresponding components of this Vector2 instance, respectively.
 
@@ -386,7 +386,7 @@ ___
 
 #### div
 
-▸ **div**(`divisor`: *number*): [*default*](#classesdefaultmd)
+▸ **div**(`divisor`: *number*): [*Vector2*](#classesvector2md)
 
 Divides both components of this Vector2 instance by 'divisor'.
 
@@ -396,11 +396,11 @@ Name | Type |
 ------ | ------ |
 `divisor` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:254
 
-▸ **div**(`divisorX`: *number*, `divisorY`: *number*): [*default*](#classesdefaultmd)
+▸ **div**(`divisorX`: *number*, `divisorY`: *number*): [*Vector2*](#classesvector2md)
 
 Divides both components of this Vector2 instance by 'divisorX' and 'divisorY', respectively.
 
@@ -411,11 +411,11 @@ Name | Type |
 `divisorX` | *number* |
 `divisorY` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:258
 
-▸ **div**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **div**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Divides both components of this Vector2 instance by the corresponding components of the given Vector2 instance, respectively.
 
@@ -423,9 +423,9 @@ Divides both components of this Vector2 instance by the corresponding components
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:262
 
@@ -433,11 +433,11 @@ ___
 
 #### floor
 
-▸ **floor**(): [*default*](#classesdefaultmd)
+▸ **floor**(): [*Vector2*](#classesvector2md)
 
 Rounds both components of this Vector2 instance to the nearest smaller integer.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:441
 
@@ -445,7 +445,7 @@ ___
 
 #### isEquals
 
-▸ **isEquals**(`vector`: [*default*](#classesdefaultmd)): *boolean*
+▸ **isEquals**(`vector`: [*Vector2*](#classesvector2md)): *boolean*
 
 Check if both components of this Vector2 instance are equal to the corresponding components of the given Vector2 instance, respectively.
 
@@ -453,7 +453,7 @@ Check if both components of this Vector2 instance are equal to the corresponding
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
 **Returns:** *boolean*
 
@@ -463,7 +463,7 @@ ___
 
 #### mod
 
-▸ **mod**(`divisor`: *number*): [*default*](#classesdefaultmd)
+▸ **mod**(`divisor`: *number*): [*Vector2*](#classesvector2md)
 
 Divides both components of this Vector2 instance by 'divisor' and sets each component equal to a remainder of that division.
 
@@ -473,11 +473,11 @@ Name | Type |
 ------ | ------ |
 `divisor` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:451
 
-▸ **mod**(`divisorX`: *number*, `divisorY`: *number*): [*default*](#classesdefaultmd)
+▸ **mod**(`divisorX`: *number*, `divisorY`: *number*): [*Vector2*](#classesvector2md)
 
 Divides both components of this Vector2 instance by 'divisorX' and 'divisorY', respectively, and sets each component equal to a corressponding remainder of that division.
 
@@ -488,7 +488,7 @@ Name | Type |
 `divisorX` | *number* |
 `divisorY` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:455
 
@@ -496,7 +496,7 @@ ___
 
 #### mult
 
-▸ **mult**(`factor`: *number*): [*default*](#classesdefaultmd)
+▸ **mult**(`factor`: *number*): [*Vector2*](#classesvector2md)
 
 Multiplies both components of this Vector2 instance by 'factor'.
 
@@ -506,11 +506,11 @@ Name | Type |
 ------ | ------ |
 `factor` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:223
 
-▸ **mult**(`factorX`: *number*, `factorY`: *number*): [*default*](#classesdefaultmd)
+▸ **mult**(`factorX`: *number*, `factorY`: *number*): [*Vector2*](#classesvector2md)
 
 Multiplies both components of this Vector2 instance by 'factorX' and 'factorY', respectively.
 
@@ -521,11 +521,11 @@ Name | Type |
 `factorX` | *number* |
 `factorY` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:227
 
-▸ **mult**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **mult**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Multiplies both components of this Vector2 instance by the corresponding components of the given Vector2 instance, respectively.
 
@@ -533,9 +533,9 @@ Multiplies both components of this Vector2 instance by the corresponding compone
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:231
 
@@ -543,11 +543,11 @@ ___
 
 #### negate
 
-▸ **negate**(): [*default*](#classesdefaultmd)
+▸ **negate**(): [*Vector2*](#classesvector2md)
 
 Inverts both components of this Vector2 instance (changes the sign).
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:338
 
@@ -555,12 +555,12 @@ ___
 
 #### normalize
 
-▸ **normalize**(): [*default*](#classesdefaultmd)
+▸ **normalize**(): [*Vector2*](#classesvector2md)
 
 Scales this Vector2 instance so that its magnitude will be 1.
 If the magnitude of this Vector2 instance is 0, than magnitude will not be changed.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:331
 
@@ -568,7 +568,7 @@ ___
 
 #### rotateBy
 
-▸ **rotateBy**(`radians`: *number*): [*default*](#classesdefaultmd)
+▸ **rotateBy**(`radians`: *number*): [*Vector2*](#classesvector2md)
 
 Rotates this Vector2 instance by 'radians'.
 
@@ -578,11 +578,11 @@ Name | Type |
 ------ | ------ |
 `radians` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:314
 
-▸ **rotateBy**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **rotateBy**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Rotates this Vector2 instance by the angle of a given Vector2 instance.
 
@@ -590,9 +590,9 @@ Rotates this Vector2 instance by the angle of a given Vector2 instance.
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:318
 
@@ -600,7 +600,7 @@ ___
 
 #### rotateTo
 
-▸ **rotateTo**(`radians`: *number*): [*default*](#classesdefaultmd)
+▸ **rotateTo**(`radians`: *number*): [*Vector2*](#classesvector2md)
 
 Rotates this Vector2 instance so that its angle will be 'radians'.
 
@@ -610,11 +610,11 @@ Name | Type |
 ------ | ------ |
 `radians` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:298
 
-▸ **rotateTo**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **rotateTo**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Rotates this Vector2 instance so that its angle will be the same as a the angle of the given Vector2 instance.
 
@@ -622,9 +622,9 @@ Rotates this Vector2 instance so that its angle will be the same as a the angle 
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:302
 
@@ -632,11 +632,11 @@ ___
 
 #### round
 
-▸ **round**(): [*default*](#classesdefaultmd)
+▸ **round**(): [*Vector2*](#classesvector2md)
 
 Rounds both components of this Vector2 instance to the nearest integer.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:421
 
@@ -644,7 +644,7 @@ ___
 
 #### set
 
-▸ **set**(`x`: *number*, `y`: *number*): [*default*](#classesdefaultmd)
+▸ **set**(`x`: *number*, `y`: *number*): [*Vector2*](#classesvector2md)
 
 Sets the both components of this Vector2 instance, respectively.
 
@@ -655,11 +655,11 @@ Name | Type |
 `x` | *number* |
 `y` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:121
 
-▸ **set**(`xy`: *number*): [*default*](#classesdefaultmd)
+▸ **set**(`xy`: *number*): [*Vector2*](#classesvector2md)
 
 Sets the both components of this Vector2 instance to 'xy'.
 
@@ -669,19 +669,19 @@ Name | Type |
 ------ | ------ |
 `xy` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:125
 
-▸ **set**(): [*default*](#classesdefaultmd)
+▸ **set**(): [*Vector2*](#classesvector2md)
 
 Sets the both components of this Vector2 instance to 0.
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:129
 
-▸ **set**(`vec`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **set**(`vec`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Sets the components of this Vector2 instance to the corresponding components of the given Vector2 instance, respectively.
 
@@ -689,9 +689,9 @@ Sets the components of this Vector2 instance to the corresponding components of 
 
 Name | Type |
 ------ | ------ |
-`vec` | [*default*](#classesdefaultmd) |
+`vec` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:133
 
@@ -699,7 +699,7 @@ ___
 
 #### setMag
 
-▸ **setMag**(`value`: *number*): [*default*](#classesdefaultmd)
+▸ **setMag**(`value`: *number*): [*Vector2*](#classesvector2md)
 
 Scales this Vector2 instance so that its magnitude will be 'value'.
 
@@ -709,11 +709,11 @@ Name | Type |
 ------ | ------ |
 `value` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:285
 
-▸ **setMag**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **setMag**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Scales this Vector2 instance so that its magnitude will be the same as the magnitude of the given Vector2 instance.
 
@@ -721,9 +721,9 @@ Scales this Vector2 instance so that its magnitude will be the same as the magni
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:289
 
@@ -731,7 +731,7 @@ ___
 
 #### sub
 
-▸ **sub**(`delta`: *number*): [*default*](#classesdefaultmd)
+▸ **sub**(`delta`: *number*): [*Vector2*](#classesvector2md)
 
 Subtracts 'delta' from the both components of this Vector2 instance.
 
@@ -741,11 +741,11 @@ Name | Type |
 ------ | ------ |
 `delta` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:192
 
-▸ **sub**(`deltaX`: *number*, `deltaY`: *number*): [*default*](#classesdefaultmd)
+▸ **sub**(`deltaX`: *number*, `deltaY`: *number*): [*Vector2*](#classesvector2md)
 
 Subtracts 'deltaX' and 'deltaY' from the components of this Vector2 instance, respectively.
 
@@ -756,11 +756,11 @@ Name | Type |
 `deltaX` | *number* |
 `deltaY` | *number* |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:196
 
-▸ **sub**(`vector`: [*default*](#classesdefaultmd)): [*default*](#classesdefaultmd)
+▸ **sub**(`vector`: [*Vector2*](#classesvector2md)): [*Vector2*](#classesvector2md)
 
 Subtracts from the components of this Vector2 instance the corresponding components of the given Vector2 instance, respectively.
 
@@ -768,9 +768,9 @@ Subtracts from the components of this Vector2 instance the corresponding compone
 
 Name | Type |
 ------ | ------ |
-`vector` | [*default*](#classesdefaultmd) |
+`vector` | [*Vector2*](#classesvector2md) |
 
-**Returns:** [*default*](#classesdefaultmd)
+**Returns:** [*Vector2*](#classesvector2md)
 
 Defined in: index.ts:200
 
@@ -797,4 +797,4 @@ Defined in: index.ts:77
 
 ### Classes
 
-- [default](#classesdefaultmd)
+- [Vector2](#classesvector2md)

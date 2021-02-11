@@ -32,7 +32,7 @@ interface IVector2 {
 	//TODO: STATIC
 }
 
-export default class Vector2 implements IVector2 {
+export class Vector2 implements IVector2 {
 	x!: number;
 	y!: number;
 

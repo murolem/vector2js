@@ -1,4 +1,4 @@
-import Vector2 from '../src/index';
+import { Vector2 } from '../src/index';
 const assert = require('assert');
 
 const generateVectorComponents = (): [number, number] => [
