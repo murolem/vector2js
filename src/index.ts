@@ -3,6 +3,8 @@ interface IVector2 {
 	y: number,
 	readonly 0: number,
 	readonly 1: number,
+	readonly u: number,
+	readonly v: number,
 
 	toString(): string;
 
@@ -75,6 +77,20 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
+	 * @returns {number} the 'x' component of this Vector2 instance.
+	 */
+	get u(): number {
+		return this.x;
+	}
+
+	/**
+	 * @returns {number} the 'y' component of this Vector2 instance.
+	 */
+	get v(): number {
+		return this.y;
+	}
+
+	/**
 	 * @returns {string} the string representation of this Vector2 instance.
 	 */
 	toString(): string {
@@ -108,7 +124,7 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * The angle in radians of this Vector2 instance.
+	 * The signed angle (from -PI to PI radians) of this Vector2 instance.
 	 */
 	get angle(): number {
 		return Math.atan2(this.y, this.x);
@@ -517,10 +533,12 @@ export class Vector2 implements IVector2 {
 	 * @returns {Vector2} a new Vector2 instance with angle equal to 'angle' (in radians) and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1. 
 	 */
 	static fromAngle(angle: number, magnitude = 1): Vector2 {
-		return new Vector2(
-			Math.cos(angle) * magnitude,
-			Math.sin(angle) * magnitude
-		);
+		return magnitude <= 0 
+			? new Vector2()
+			: new Vector2(
+				Math.cos(angle) * magnitude,
+				Math.sin(angle) * magnitude
+			);
 	}
 
 	/**
@@ -531,7 +549,7 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * @returns {number} a signed angle (from -PI to PI radians) between the two given Vector2 instances. 
+	 * @returns {number} the smallest signed angle (from -PI to PI radians) between the two given Vector2 instances. 
 	 * The resulting angle is the angle that, if applied as a rotation to the vector 'vector1', will result in the 'vector2'.
 	 */
 	static angleBetweenSigned(vector1: Vector2, vector2: Vector2): number {

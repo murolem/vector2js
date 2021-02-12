@@ -62,6 +62,8 @@
 - [mag](#mag)
 - [max](#max)
 - [min](#min)
+- [u](#u)
+- [v](#v)
 
 #### Methods
 
@@ -182,13 +184,13 @@ ___
 
 • **angle**(): *number*
 
-The angle in radians of this Vector2 instance.
+The signed angle (from -PI to PI radians) of this Vector2 instance.
 
 **Returns:** *number*
 
 • **angle**(`value`: *number*): *void*
 
-The angle in radians of this Vector2 instance.
+The signed angle (from -PI to PI radians) of this Vector2 instance.
 
 ##### Parameters:
 
@@ -241,6 +243,26 @@ ___
 **Returns:** *number*
 
 the smallest of two components of this Vector2 instance.
+
+___
+
+#### u
+
+• **u**(): *number*
+
+**Returns:** *number*
+
+the 'x' component of this Vector2 instance.
+
+___
+
+#### v
+
+• **v**(): *number*
+
+**Returns:** *number*
+
+the 'y' component of this Vector2 instance.
 
 ### Methods
 
@@ -769,7 +791,7 @@ Name | Type |
 
 **Returns:** *number*
 
-a signed angle (from -PI to PI radians) between the two given Vector2 instances.
+the smallest signed angle (from -PI to PI radians) between the two given Vector2 instances.
 The resulting angle is the angle that, if applied as a rotation to the vector 'vector1', will result in the 'vector2'.
 
 ___

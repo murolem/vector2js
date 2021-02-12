@@ -6,6 +6,12 @@ const generateVectorComponents = (): [number, number] => [
 	Math.floor(Math.random() * 100 - 50),
 ];
 
+const fuzzyEqual = (actual: number, expected: number, thresold: number, msg?: string) => {
+	if(Math.abs(actual - expected) > thresold) assert.fail(msg === undefined ? `expected '${expected}, got '${actual}'` : msg);
+};
+
+const errorMargin = Math.pow(10, -12);
+
 describe('Vector2', function() {
 	describe('INSTANCE functionality', function() {
 		describe('#constructor()', function() {
@@ -15,6 +21,8 @@ describe('Vector2', function() {
 				assert.strictEqual(vector.y, 0, 'y');	
 				assert.strictEqual(vector[0], 0, '0');
 				assert.strictEqual(vector[1], 0, '1');
+				assert.strictEqual(vector.u, 0, 'u');
+				assert.strictEqual(vector.v, 0, 'v');
 			});
 	
 			it('should set both components of a brand new Vector2 instance if there was one argument - of a type \'number\' - provided.', function() {
@@ -24,6 +32,8 @@ describe('Vector2', function() {
 				assert.strictEqual(vector.y, components[0], 'y');	
 				assert.strictEqual(vector[0], components[0], '0');
 				assert.strictEqual(vector[1], components[0], '1');
+				assert.strictEqual(vector.u, components[0], 'u');
+				assert.strictEqual(vector.v, components[0], 'v');	
 			});
 	
 			it('should set both components of a brand new Vector2 instance if there were two arguments - both of a type \'number\' - provided.', function() {
@@ -33,6 +43,8 @@ describe('Vector2', function() {
 				assert.strictEqual(vector.y, components[1], 'y');
 				assert.strictEqual(vector[0], components[0], '0');
 				assert.strictEqual(vector[1], components[1], '1');
+				assert.strictEqual(vector.u, components[0], 'u');
+				assert.strictEqual(vector.v, components[1], 'v');
 			});
 	
 			it('should set both components of a brand new Vector2 instance if there was one argument - of type \'Vector2\' - provided.', function() {
@@ -42,6 +54,8 @@ describe('Vector2', function() {
 				assert.strictEqual(vector.y, vectorFrom[1], 'y');
 				assert.strictEqual(vector[0], vectorFrom[0], '0');
 				assert.strictEqual(vector[1], vectorFrom[1], '1');
+				assert.strictEqual(vector.u, vectorFrom[0], 'u');
+				assert.strictEqual(vector.v, vectorFrom[1], 'v');
 			});
 		});
 
@@ -310,7 +324,7 @@ describe('Vector2', function() {
 		});
 
 		describe('#clamp()', function() {
-			describe('PROPER flow', function() {
+			describe('GROUP | forward flow', function() {
 				it('should constrain the currently tested Vector2 instance if there were no arguments provided', function() {
 					const vector = new Vector2(0.7, 33333);
 					vector.clamp();
@@ -336,7 +350,7 @@ describe('Vector2', function() {
 				});
 			});
 
-			describe('REVERSED flow', function() {
+			describe('GROUP | reversed flow', function() {
 				it('should constrain the currently tested Vector2 instance if there was one argument - of a type \'number\' - provided, but order is reversed.', function() {
 					const vector = new Vector2(100, -50);
 					vector.clamp(-75);
@@ -436,6 +450,276 @@ describe('Vector2', function() {
 				assert.strictEqual(vector.y, -10, 'y');
 			});
 		});
+
+		describe('#lerp()', function() {
+			it('should linearly interpolate currently tested Vector2 instance between the two given Vector2 instances.', function() {
+				const vectorFrom = new Vector2(-100, 50);
+				const vectorTo = new Vector2(300, 90);
+				const vector = new Vector2().lerp(vectorFrom, vectorTo, .25);
+				assert.strictEqual(vector.x, 0, 'x');
+				assert.strictEqual(vector.y, 60, 'y');
+			});
+		});
 	});
 
+	describe('STATIC functionality', function() {
+		describe('add()', function() {
+			it('should add any number of the given Vector2 instances together.', function() {
+				const vectors: [Vector2, Vector2, ...Vector2[]] = [
+					new Vector2(3, 15),
+					new Vector2(12, 25),
+					new Vector2(85, -140)
+				];
+				const vector = Vector2.add(...vectors);
+				assert.strictEqual(vector.x, 100, 'x');
+				assert.strictEqual(vector.y, -100, 'y');
+			});
+		});
+
+		describe('sub()', function() {
+			it('should sequentially subtract the given Vector2 instances.', function() {
+				const vectors: [Vector2, Vector2, ...Vector2[]] = [
+					new Vector2(100, -100),
+					new Vector2(3, 15),
+					new Vector2(12, 25),
+					new Vector2(85, -140)
+				];
+				const vector = Vector2.sub(...vectors);
+				assert.strictEqual(vector.x, 0, 'x');
+				assert.strictEqual(vector.y, 0, 'y');
+			});
+		});
+
+		describe('mult()', function() {
+			it('should multiply the given Vector2 instances together.', function() {
+				const vectors: [Vector2, Vector2, ...Vector2[]] = [
+					new Vector2(111, -50),
+					new Vector2(10, -10),
+					new Vector2(-2, 3),
+				];
+				const vector = Vector2.mult(...vectors);
+				assert.strictEqual(vector.x, -2220, 'x');
+				assert.strictEqual(vector.y, 1500, 'y');
+			});
+		});
+
+		describe('div()', function() {
+			it('should sequentially divide the given Vector2 instances.', function() {
+				const vectors: [Vector2, Vector2, ...Vector2[]] = [
+					new Vector2(1000, -50),
+					new Vector2(50, -10),
+					new Vector2(-2, 5),
+				];
+				const vector = Vector2.div(...vectors);
+				assert.strictEqual(vector.x, -10, 'x');
+				assert.strictEqual(vector.y, 1, 'y');
+			});
+		});
+
+		describe('dist()', function() {
+			it('should return the distance between the two given Vector2 instances.', function() {
+				const vector1 = new Vector2(100, 200);
+				const vector2 = new Vector2(55, 28);
+				const vectorBetween = Vector2.sub(vector2, vector1);
+				assert.strictEqual(Vector2.dist(vector1, vector2), vectorBetween.mag);
+			});
+		});
+
+		describe('fromAngle()', function() {
+			describe('GROUP | angle is positive or zero, magnitude is unspecified (assuming 0 to PI * 2 radians angle mode).', function() {
+				it('should create a new Vector2 instance with the angle is equal to zero.', function() {
+					const vector = Vector2.fromAngle(0);
+					assert.strictEqual(vector.angle, 0);
+				});
+
+				it('should create a new Vector2 instance with the angle is more than zero but less than PI.', function() {
+					const vector = Vector2.fromAngle(Math.PI / 3);
+					assert.strictEqual(vector.angle, Math.PI / 3);
+				});
+
+				it('should create a new Vector2 instance with the angle is equal to PI.', function() {
+					const vector = Vector2.fromAngle(Math.PI);
+					assert.strictEqual(vector.angle, Math.PI);
+				});
+
+				it('should create a new Vector2 instance with the angle is more than PI but less than PI * 2.', function() {
+					const vector = Vector2.fromAngle(Math.PI + Math.PI / 6);
+					fuzzyEqual (vector.angle, -Math.PI / 6 * 5, errorMargin);
+				});
+
+				it('should create a new Vector2 instance with the angle equal to PI * 2.', function() {
+					const vector = Vector2.fromAngle(Math.PI * 2);
+					fuzzyEqual (vector.angle, 0, errorMargin);
+				});
+
+				it('should create a new Vector2 instance with the angle more than PI * 2.', function() {
+					const vector = Vector2.fromAngle(Math.PI * 2 + Math.PI / 3);
+					fuzzyEqual (vector.angle, Math.PI / 3, errorMargin);
+				});
+			});
+
+			describe('GROUP | angle is negative, magnitude is unspecified (assuming 0 to PI * 2 radians angle mode).', function() {
+				it('should create a new Vector2 instance with the angle is less than zero but more than -PI.', function() {
+					const vector = Vector2.fromAngle(-Math.PI / 3);
+					assert.strictEqual(vector.angle, -Math.PI / 3);
+				});
+
+				it('should create a new Vector2 instance with the angle is equal to -PI.', function() {
+					const vector = Vector2.fromAngle(-Math.PI);
+					assert.strictEqual(vector.angle, -Math.PI);
+				});
+
+				it('should create a new Vector2 instance with the angle is less than -PI but more than -PI * 2.', function() {
+					const vector = Vector2.fromAngle(-Math.PI - Math.PI / 6);
+					fuzzyEqual (vector.angle, Math.PI / 6 * 5, errorMargin);
+				});
+
+				it('should create a new Vector2 instance with the angle equal to -PI * 2.', function() {
+					const vector = Vector2.fromAngle(-Math.PI * 2);
+					fuzzyEqual (vector.angle, 0, errorMargin);
+				});
+
+				it('should create a new Vector2 instance with the angle less than -PI * 2.', function() {
+					const vector = Vector2.fromAngle(-Math.PI * 2 - Math.PI / 3);
+					fuzzyEqual (vector.angle, -Math.PI / 3, errorMargin);
+				});
+			});
+
+			it('should create a new Vector2 instance with the magnitude set to 0.', function() {
+				const vector = Vector2.fromAngle(Math.PI / 2, 0);
+				assert.strictEqual(vector.x, 0);
+				assert.strictEqual(vector.y, 0);
+			}); 
+		});
+
+		describe('angleBetween()', function() {
+			it('should return the angle between the two given Vector2 instances, if the angles of the given instances are in range (0, PI).', function() {
+				const vector1 = Vector2.fromAngle(Math.PI / 4);
+				const vector2 = Vector2.fromAngle(Math.PI / 2);
+				fuzzyEqual(Vector2.angleBetween(vector1, vector2), Math.PI / 4, errorMargin);
+			});
+
+			it('should return the angle between the two given Vector2 instances, if the angle of the first instance is in range (0, PI) and the angle of the second instance is in range (PI, PI * 2) (assuming 0 to PI * 2 radians angle mode).', function() {
+				const vector1 = Vector2.fromAngle(Math.PI / 2);
+				const vector2 = Vector2.fromAngle(Math.PI + Math.PI / 2);
+				fuzzyEqual(Vector2.angleBetween(vector1, vector2), Math.PI, errorMargin);
+			});
+
+			it('should return the angle between the two given Vector2 instances, if the angles of the given instances are in range (PI, PI * 2) (assuming 0 to PI * 2 radians angle mode).', function() {
+				const vector1 = Vector2.fromAngle(Math.PI + Math.PI / 4);
+				const vector2 = Vector2.fromAngle(Math.PI + Math.PI / 2);
+				fuzzyEqual(Vector2.angleBetween(vector1, vector2), Math.PI / 4, errorMargin);
+			});
+		});
+
+		describe('angleBetweenSigned()', function() {
+			describe('GROUP | the angles of the given instances are in range (0, PI).', function() {
+				it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is larger than the angle of the second instance.', function() {
+					const vector1 = Vector2.fromAngle(Math.PI / 2);
+					const vector2 = Vector2.fromAngle(Math.PI / 4);
+					fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), -Math.PI / 4, errorMargin);
+				});
+
+				it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is smaller than the angle of the second instance.', function() {
+					const vector1 = Vector2.fromAngle(Math.PI / 4);
+					const vector2 = Vector2.fromAngle(Math.PI / 2);
+					fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), Math.PI / 4, errorMargin);
+				});
+			});
+
+			describe('GROUP | the angle of the first instance is in range (0, PI) and the angle of the second instance is in range (PI, PI * 2) (assuming 0 to PI * 2 radians angle mode).', function() {
+				describe('GROUP | the angle range is less than PI', function() {
+					it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is larger than the angle of the second instance.', function() {
+						const vector1 = Vector2.fromAngle(Math.PI + Math.PI / 4);
+						const vector2 = Vector2.fromAngle(Math.PI / 2);
+						fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), -(Math.PI / 4 + Math.PI / 2) , errorMargin);
+					});
+	
+					it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is smaller than the angle of the second instance.', function() {
+						const vector1 = Vector2.fromAngle(Math.PI / 2);
+						const vector2 = Vector2.fromAngle(Math.PI + Math.PI / 4);
+						fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), Math.PI / 4 + Math.PI / 2 , errorMargin);
+					});
+				});
+
+				describe('GROUP | the angle range is more than PI', function() {
+					it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is larger than the angle of the second instance.', function() {
+						const vector1 = Vector2.fromAngle(Math.PI + Math.PI / 2);
+						const vector2 = Vector2.fromAngle(Math.PI / 4);
+						fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), Math.PI / 2 + Math.PI / 4, errorMargin);
+					});
+	
+					it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is smaller than the angle of the second instance.', function() {
+						const vector1 = Vector2.fromAngle(Math.PI / 4);
+						const vector2 = Vector2.fromAngle(Math.PI + Math.PI / 2);
+						fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), -(Math.PI / 2 + Math.PI / 4), errorMargin);
+					});
+				});
+			});
+
+			describe('GROUP | the angles of the given instances are in range (PI, PI * 2).', function() {
+				it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is larger than the angle of the second instance.', function() {
+					const vector1 = Vector2.fromAngle(Math.PI + Math.PI / 2);
+					const vector2 = Vector2.fromAngle(Math.PI + Math.PI / 4);
+					fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), -Math.PI / 4, errorMargin);
+				});
+
+				it('should return the signed angle between the two given Vector2 instances, if the angle of the first instance is smaller than the angle of the second instance.', function() {
+					const vector1 = Vector2.fromAngle(Math.PI + Math.PI / 4);
+					const vector2 = Vector2.fromAngle(Math.PI + Math.PI / 2);
+					fuzzyEqual(Vector2.angleBetweenSigned(vector1, vector2), Math.PI / 4, errorMargin);
+				});
+			});
+		});
+
+		describe('dot()', function() {
+			it('should calculate the dot product of the two given Vector2 instances.', function() {
+				const vector1 = new Vector2(1, 3);
+				const vector2 = new Vector2(4, -2);
+				fuzzyEqual(Vector2.dot(vector1, vector2), -2, errorMargin);
+			});
+		});
+
+		describe('lerp()', function() {
+			it('should linearly interpolate between the two given Vector2 instances', function() {
+				const vectorFrom = new Vector2(-100, 50);
+				const vectorTo = new Vector2(300, 90);
+				const vector = new Vector2();
+				Vector2.lerp(vector, vectorFrom, vectorTo, .25);
+				assert.strictEqual(vector.x, 0, 'x');
+				assert.strictEqual(vector.y, 60, 'y');
+			});
+		});
+
+		describe('zero()', function() {
+			it('should return the new Vector2 instance with both its components set to 0.', function() {
+				const vector = Vector2.zero();
+				assert.strictEqual(vector.x, 0);
+				assert.strictEqual(vector.y, 0);
+			});
+		});
+
+		describe('random()', function() {
+			it('should generate a new Vector2 instance which meets the critera of a random unit vector, magnitude is unspecified; checking magnitude.', function() {
+				const vector = Vector2.random();
+				fuzzyEqual(vector.mag, 1, errorMargin);
+			});
+
+			it('should generate a new Vector2 instance which meets the critera of a random unit vector, magnitude is unspecified; checking angles.', function() {
+				const angleSectionsOfPiDiv4Times4Used = {};
+				for(let i = 0; i < 100; i++) {
+					const vector = Vector2.random();
+					angleSectionsOfPiDiv4Times4Used[vector.angle >= 0
+						? vector.angle <= Math.PI / 2 
+							? 0
+							: 1 
+						: vector.angle <= -Math.PI / 2
+							? 2
+							: 3] = true;
+					fuzzyEqual(vector.mag, 1, errorMargin);
+				}
+				assert.strictEqual(Object.keys(angleSectionsOfPiDiv4Times4Used).length, 4);
+			});
+		});
+	});
 });
