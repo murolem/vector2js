@@ -34,7 +34,13 @@ interface IVector2 {
 	lerp(vector1: Vector2, vector2: Vector2, t: number): Vector2;
 }
 
+/**
+ * Multiply your radians by this to transform them to degrees.
+ */
 export const RAD2DEG = 180 / Math.PI;
+/**
+ * Multiply your degrees by this to transform them to radians.
+ */
 export const DEG2RAD = 1 / RAD2DEG;
 
 export class Vector2 implements IVector2 {

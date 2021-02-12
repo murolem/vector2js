@@ -963,8 +963,12 @@ a new Vector2 instance with both its components set to 0.
 
 • `Const` **DEG2RAD**: *number*
 
+Multiply your degrees by this to transform them to radians.
+
 ___
 
 ### RAD2DEG
 
 • `Const` **RAD2DEG**: *number*
+
+Multiply your radians by this to transform them to degrees.
