@@ -438,9 +438,4 @@ describe('Vector2', function() {
 		});
 	});
 
-	describe('STATIC functionality', function() {
-		describe('add', function() {
-
-		});
-	});
 });
