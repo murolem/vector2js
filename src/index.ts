@@ -29,8 +29,11 @@ interface IVector2 {
 	ceil(): Vector2;
 	floor(): Vector2;
 	mod(...args: [number] | [number, number]): Vector2;
-	//TODO: STATIC
+	lerp(vector1: Vector2, vector2: Vector2, t: number): Vector2;
 }
+
+export const RAD2DEG = 180 / Math.PI;
+export const DEG2RAD = 1 / RAD2DEG;
 
 export class Vector2 implements IVector2 {
 	x!: number;
@@ -466,5 +469,105 @@ export class Vector2 implements IVector2 {
 			);
 		}
 		return this;
+	}
+
+	/**
+	 * Linearly interpolates between the two given Vector2 instances by 't'. 
+	 */
+	lerp(vector1: Vector2, vector2: Vector2, t: number): Vector2 {
+		return Vector2.lerp(this, vector1, vector2, t);
+	}
+
+	/**
+	 * Adds the given Vector2 instances together and returns new Vector2 instance containing the result.
+	 */
+	static add(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vectors.slice(1).reduce((accum, vector) => accum.add(vector), vectors[0].copy());
+	}
+	
+	/**
+	 * Sequentially subtracts all the given Vector2 instances and returns new Vector2 instance containing the result.
+	 */
+	static sub(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vectors.slice(1).reduce((accum, vector) => accum.sub(vector), vectors[0].copy());
+	}
+
+	/**
+	 * Multiplies the given Vector2 instances together and returns new Vector2 instance containing the result.
+	 */
+	static mult(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vectors.slice(1).reduce((accum, vector) => accum.mult(vector), vectors[0].copy());
+	}
+
+	/**
+	 * Sequentially divides the given Vector2 instances and returns new Vector2 instance containing the result.
+	 */
+	static div(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vectors.slice(1).reduce((accum, vector) => accum.div(vector), vectors[0].copy());
+	}
+
+	/**
+	 * @returns {number} the distance between the two given Vector2 instances.
+	 */
+	static dist(vector1: Vector2, vector2: Vector2): number {
+		return Math.hypot(vector2.x - vector1.x, vector2.y - vector1.y);
+	}
+
+	/**
+	 * @returns {Vector2} a new Vector2 instance with angle equal to 'angle' (in radians) and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1. 
+	 */
+	static fromAngle(angle: number, magnitude = 1): Vector2 {
+		return new Vector2(
+			Math.cos(angle) * magnitude,
+			Math.sin(angle) * magnitude
+		);
+	}
+
+	/**
+	 * @returns {number} an unsigned angle (from 0 to PI radians) between the two given Vector2 instances.
+	 */
+	static angleBetween(vector1: Vector2, vector2: Vector2): number {
+		return Math.acos((vector1.x * vector2.x + vector1.y * vector2.y) / (Math.sqrt(Math.pow(vector1.x, 2) + Math.pow(vector1.y, 2)) * Math.sqrt(Math.pow(vector2.x, 2) + Math.pow(vector2.y, 2))));
+	}
+
+	/**
+	 * @returns {number} a signed angle (from -PI to PI radians) between the two given Vector2 instances. 
+	 * The resulting angle is the angle that, if applied as a rotation to the vector 'vector1', will result in the 'vector2'.
+	 */
+	static angleBetweenSigned(vector1: Vector2, vector2: Vector2): number {
+		const tempMess = vector2.angle - vector1.angle;
+		return Math.abs(tempMess) > Math.PI ? (Math.PI * 2 - Math.abs(tempMess)) * -Math.sign(tempMess) : tempMess;
+	}
+
+	/**
+	 * @returns {number} the dot product of the two given Vector2 instances.
+	 */
+	static dot(vector1: Vector2, vector2: Vector2): number {
+		return vector1.mag * vector2.mag * Math.cos(Vector2.angleBetween(vector1, vector2));
+	}
+
+	/**
+	 * Linearly interpolates between the two given Vector2 instances by 't'. 
+	 * Result both is stored in the provied by user 'vectorOut' Vector2 instance and returned by the function. 
+	 */
+	static lerp(vectorOut: Vector2, vector1: Vector2, vector2: Vector2, t: number): Vector2 {
+		return vectorOut.set(
+			vector1.x + (vector2.x - vector1.x) * t,
+			vector1.y + (vector2.y - vector1.y) * t
+		);
+	}
+
+	/**
+	 * @returns {Vector2} a new Vector2 instance with both its components set to 0.
+	 */
+	static zero(): Vector2 {
+		return new Vector2();
+	}
+
+	/**
+	 * @returns {Vector2} a new Vector2 instance with a random angle and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1. 
+	 */
+	static random(magnitude = 1): Vector2 {
+		return Vector2.fromAngle(Math.random() * Math.PI * 2, magnitude);
 	}
 }

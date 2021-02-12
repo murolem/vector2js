@@ -300,9 +300,12 @@ describe('Vector2', function() {
 
 		describe('#copy()', function() {
 			it('should create a new Vector2 instance off currently tested Vector2 instance.', function() {
-				const vector = new Vector2(123, 321);
+				const vectorComponents = [123, 321];
+				const vector = new Vector2(vectorComponents[0], vectorComponents[1]);
 				const copy = vector.copy();
-				assert.strictEqual(vector.isEquals(copy), true);
+				vector.set(50, 100);
+				assert.strictEqual(copy.x, vectorComponents[0]);
+				assert.strictEqual(copy.y, vectorComponents[1]);
 			});
 		});
 
@@ -419,19 +422,25 @@ describe('Vector2', function() {
 		});
 
 		describe('#mod()', function() {
-			it('should divide both components of the currently tested Vector2 instance by one argument of a type \'number\' and set each component equal to a remainder of that division', function() {
+			it('should divide both components of the currently tested Vector2 instance by one argument of a type \'number\' and set each component equal to a remainder of that division.', function() {
 				const vector = new Vector2(17, -23);
 				vector.mod(8);
 				assert.strictEqual(vector.x, 1, 'x');
 				assert.strictEqual(vector.y, -7, 'y');
 			});
 
-			it('should divide both components of the currently tested Vector2 instance by two arguments both of a type \'number\' and set each component equal to a remainder of that division', function() {
+			it('should divide both components of the currently tested Vector2 instance by two arguments both of a type \'number\' and set each component equal to a remainder of that division.', function() {
 				const vector = new Vector2(17, -23);
 				vector.mod(8, 13);
 				assert.strictEqual(vector.x, 1, 'x');
 				assert.strictEqual(vector.y, -10, 'y');
 			});
+		});
+	});
+
+	describe('STATIC functionality', function() {
+		describe('add', function() {
+
 		});
 	});
 });

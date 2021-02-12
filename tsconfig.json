@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES6",                         
-    "module": "commonjs",                    
-    "outDir": "./dist/temp",                                       
+    "module": "ES6",                    
+    "outDir": "./dist",                                       
     "strict": true,                          
     "esModuleInterop": true,                  
     "skipLibCheck": true,                     
     "forceConsistentCasingInFileNames": true,
-    "declaration": true
+    "declaration": true,
   },
-  "exclude": ["./test/*.*"]
+  "exclude": ["./test/*", "./dist/*"]
 }

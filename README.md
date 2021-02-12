@@ -14,6 +14,10 @@
 - [@aliser/vector2](#aliservector2)
   - [Table of contents](#table-of-contents-1)
     - [Classes](#classes-1)
+    - [Variables](#variables)
+  - [Variables](#variables-1)
+    - [DEG2RAD](#deg2rad)
+    - [RAD2DEG](#rad2deg)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -68,6 +72,7 @@
 - [div](#div)
 - [floor](#floor)
 - [isEquals](#isequals)
+- [lerp](#lerp)
 - [mod](#mod)
 - [mult](#mult)
 - [negate](#negate)
@@ -79,6 +84,18 @@
 - [setMag](#setmag)
 - [sub](#sub)
 - [toString](#tostring)
+- [add](#add)
+- [angleBetween](#anglebetween)
+- [angleBetweenSigned](#anglebetweensigned)
+- [dist](#dist)
+- [div](#div)
+- [dot](#dot)
+- [fromAngle](#fromangle)
+- [lerp](#lerp)
+- [mult](#mult)
+- [random](#random)
+- [sub](#sub)
+- [zero](#zero)
 
 ### Constructors
 
@@ -405,6 +422,24 @@ Name | Type |
 
 ___
 
+#### lerp
+
+▸ **lerp**(`vector1`: [*Vector2*](#classesvector2md), `vector2`: [*Vector2*](#classesvector2md), `t`: *number*): [*Vector2*](#classesvector2md)
+
+Linearly interpolates between the two given Vector2 instances by 't'.
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`vector1` | [*Vector2*](#classesvector2md) |
+`vector2` | [*Vector2*](#classesvector2md) |
+`t` | *number* |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+___
+
 #### mod
 
 ▸ **mod**(`divisor`: *number*): [*Vector2*](#classesvector2md)
@@ -686,6 +721,202 @@ ___
 
 the string representation of this Vector2 instance.
 
+___
+
+#### add
+
+▸ `Static`**add**(...`vectors`: [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]]): [*Vector2*](#classesvector2md)
+
+Adds the given Vector2 instances together and returns new Vector2 instance containing the result.
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`...vectors` | [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]] |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+___
+
+#### angleBetween
+
+▸ `Static`**angleBetween**(`vector1`: [*Vector2*](#classesvector2md), `vector2`: [*Vector2*](#classesvector2md)): *number*
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`vector1` | [*Vector2*](#classesvector2md) |
+`vector2` | [*Vector2*](#classesvector2md) |
+
+**Returns:** *number*
+
+an unsigned angle (from 0 to PI radians) between the two given Vector2 instances.
+
+___
+
+#### angleBetweenSigned
+
+▸ `Static`**angleBetweenSigned**(`vector1`: [*Vector2*](#classesvector2md), `vector2`: [*Vector2*](#classesvector2md)): *number*
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`vector1` | [*Vector2*](#classesvector2md) |
+`vector2` | [*Vector2*](#classesvector2md) |
+
+**Returns:** *number*
+
+a signed angle (from -PI to PI radians) between the two given Vector2 instances.
+The resulting angle is the angle that, if applied as a rotation to the vector 'vector1', will result in the 'vector2'.
+
+___
+
+#### dist
+
+▸ `Static`**dist**(`vector1`: [*Vector2*](#classesvector2md), `vector2`: [*Vector2*](#classesvector2md)): *number*
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`vector1` | [*Vector2*](#classesvector2md) |
+`vector2` | [*Vector2*](#classesvector2md) |
+
+**Returns:** *number*
+
+the distance between the two given Vector2 instances.
+
+___
+
+#### div
+
+▸ `Static`**div**(...`vectors`: [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]]): [*Vector2*](#classesvector2md)
+
+Sequentially divides the given Vector2 instances and returns new Vector2 instance containing the result.
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`...vectors` | [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]] |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+___
+
+#### dot
+
+▸ `Static`**dot**(`vector1`: [*Vector2*](#classesvector2md), `vector2`: [*Vector2*](#classesvector2md)): *number*
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`vector1` | [*Vector2*](#classesvector2md) |
+`vector2` | [*Vector2*](#classesvector2md) |
+
+**Returns:** *number*
+
+the dot product of the two given Vector2 instances.
+
+___
+
+#### fromAngle
+
+▸ `Static`**fromAngle**(`angle`: *number*, `magnitude?`: *number*): [*Vector2*](#classesvector2md)
+
+##### Parameters:
+
+Name | Type | Default value |
+------ | ------ | ------ |
+`angle` | *number* | - |
+`magnitude` | *number* | 1 |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+a new Vector2 instance with angle equal to 'angle' (in radians) and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1.
+
+___
+
+#### lerp
+
+▸ `Static`**lerp**(`vectorOut`: [*Vector2*](#classesvector2md), `vector1`: [*Vector2*](#classesvector2md), `vector2`: [*Vector2*](#classesvector2md), `t`: *number*): [*Vector2*](#classesvector2md)
+
+Linearly interpolates between the two given Vector2 instances by 't'.
+Result both is stored in the provied by user 'vectorOut' Vector2 instance and returned by the function.
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`vectorOut` | [*Vector2*](#classesvector2md) |
+`vector1` | [*Vector2*](#classesvector2md) |
+`vector2` | [*Vector2*](#classesvector2md) |
+`t` | *number* |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+___
+
+#### mult
+
+▸ `Static`**mult**(...`vectors`: [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]]): [*Vector2*](#classesvector2md)
+
+Multiplies the given Vector2 instances together and returns new Vector2 instance containing the result.
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`...vectors` | [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]] |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+___
+
+#### random
+
+▸ `Static`**random**(`magnitude?`: *number*): [*Vector2*](#classesvector2md)
+
+##### Parameters:
+
+Name | Type | Default value |
+------ | ------ | ------ |
+`magnitude` | *number* | 1 |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+a new Vector2 instance with a random angle and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1.
+
+___
+
+#### sub
+
+▸ `Static`**sub**(...`vectors`: [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]]): [*Vector2*](#classesvector2md)
+
+Sequentially subtracts all the given Vector2 instances and returns new Vector2 instance containing the result.
+
+##### Parameters:
+
+Name | Type |
+------ | ------ |
+`...vectors` | [[*Vector2*](#classesvector2md), [*Vector2*](#classesvector2md), ...Vector2[]] |
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+___
+
+#### zero
+
+▸ `Static`**zero**(): [*Vector2*](#classesvector2md)
+
+**Returns:** [*Vector2*](#classesvector2md)
+
+a new Vector2 instance with both its components set to 0.
+
 
 <a name="modulesmd"></a>
 
@@ -698,3 +929,20 @@ the string representation of this Vector2 instance.
 ### Classes
 
 - [Vector2](#classesvector2md)
+
+### Variables
+
+- [DEG2RAD](#deg2rad)
+- [RAD2DEG](#rad2deg)
+
+## Variables
+
+### DEG2RAD
+
+• `Const` **DEG2RAD**: *number*
+
+___
+
+### RAD2DEG
+
+• `Const` **RAD2DEG**: *number*

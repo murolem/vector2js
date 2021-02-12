@@ -5,11 +5,11 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "build": "npm run readme && npm run compile",
+    "compile": "rimraf dist && tsc",
+    "readme": "rimraf readme.md && typedoc --plugin typedoc-plugin-markdown src/index.ts --disableSources && concat-md --toc --decrease-title-levels --dir-name-as-title docs > README.md && rimraf docs",
     "test": "ts-mocha -p tsconfig.json test/*",
-    "prebuild": "rimraf dist",
-    "build": "npm run readme && tsc && minify dist/temp/index.js > dist/index.js && cpy dist/temp/index.d.ts dist && rimraf dist/temp",
-    "coverage": "nyc npm run test",
-    "readme": "rimraf readme.md && typedoc --plugin typedoc-plugin-markdown src/index.ts --disableSources && concat-md --toc --decrease-title-levels --dir-name-as-title docs > README.md && rimraf docs"
+    "coverage": "nyc npm run test"
   },
   "keywords": [
     "math",
@@ -46,5 +46,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "type": "module"
 }
