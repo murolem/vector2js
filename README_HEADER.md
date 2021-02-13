@@ -1,3 +1,6 @@
+[![Build Status](https://www.travis-ci.com/Eleseer/vector2js.svg?branch=main)](https://www.travis-ci.com/Eleseer/vector2js)
+[![Coverage Status](https://coveralls.io/repos/github/Eleseer/vector2js/badge.svg?branch=main)](https://coveralls.io/github/Eleseer/vector2js?branch=main)
+
 # Usage
 Install with npm.
 ```
