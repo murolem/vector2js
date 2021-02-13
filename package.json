@@ -37,13 +37,8 @@
     "typedoc-plugin-markdown": "^3.4.5",
     "typescript": "^4.1.3"
   },
-  "repository": {
-    "type": "git",
-    "directory": "https://github.com/Eleseer/vector2js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Eleseer/vector2js/issues"
-  },
+  "repository": "github:Eleseer/vector2js",
+  "bugs": "https://github.com/Eleseer/vector2js/issues",
   "files": [
     "dist"
   ],
