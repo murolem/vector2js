@@ -521,7 +521,7 @@ describe('Vector2', function() {
 				const vector1 = new Vector2(100, 200);
 				const vector2 = new Vector2(55, 28);
 				const vectorBetween = Vector2.sub(vector2, vector1);
-				assert.strictEqual(Vector2.dist(vector1, vector2), vectorBetween.mag);
+				fuzzyEqual(Vector2.dist(vector1, vector2), vectorBetween.mag, errorMargin);
 			});
 		});
 

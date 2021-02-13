@@ -122,7 +122,7 @@ export class Vector2 implements IVector2 {
 	 * If negative values or values less than zero provided, then the magnitude will be set to 0.
 	 */
 	get mag(): number {
-		return Math.hypot(this.x, this.y);
+		return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
 	}
 
 	set mag(value: number) {

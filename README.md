@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [Usage](#usage)
 - [Classes](#classes)
   - [Class: Vector2](#class-vector2)
     - [Hierarchy](#hierarchy)
