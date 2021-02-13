@@ -1,13 +1,13 @@
 {
   "name": "@aliser/vector2",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Some basic functionality to represent and work with 2D vectors.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "npm run readme && npm run compile",
     "compile": "rimraf dist && tsc",
-    "readme": "rimraf readme.md && typedoc --plugin typedoc-plugin-markdown src/index.ts --disableSources && concat-md --toc --decrease-title-levels --dir-name-as-title docs > README.md && rimraf docs",
+    "readme": "rimraf readme.md && typedoc --plugin typedoc-plugin-markdown src/index.ts --disableSources && cpy README_HEADER.md docs && concat-md --toc --decrease-title-levels --dir-name-as-title docs > README.md && rimraf docs",
     "test": "ts-mocha -p tsconfig.test.json test/*.*",
     "coverage": "nyc npm run test"
   },
