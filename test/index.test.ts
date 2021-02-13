@@ -201,6 +201,13 @@ describe('Vector2', function() {
 			});
 		});
 
+		describe('#sqrMag <- get', function() {
+			it('should return the squared magnitude of the currently tested Vector2 instance.', function() {
+				const vector = new Vector2(3, 5);
+				assert.strictEqual(vector.sqrMag, 34);
+			});
+		});
+
 		describe('#normalize()', function() {
 			it('should normalize the currently tested Vector2 instance if magnitude is more than 0', function() {
 				const vector = new Vector2(3, 4);

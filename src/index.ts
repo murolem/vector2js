@@ -10,6 +10,7 @@ interface IVector2 {
 
 	readonly max: number;
 	readonly min: number;
+	readonly sqrMag: number;
 
 	mag: number;
 	angle: number;
@@ -115,6 +116,13 @@ export class Vector2 implements IVector2 {
 	 */
 	get min(): number {
 		return Math.min(this.x, this.y);
+	}
+
+	/**
+	 * @returns {number} the squared length of this Vector2 instance.
+	 */
+	get sqrMag(): number {
+		return Math.pow(this.x, 2) + Math.pow(this.y, 2);
 	}
 
 	/**

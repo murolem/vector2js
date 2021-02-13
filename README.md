@@ -80,6 +80,7 @@ Below you can find the docs for all of this.
 - [mag](#mag)
 - [max](#max)
 - [min](#min)
+- [sqrMag](#sqrmag)
 - [u](#u)
 - [v](#v)
 
@@ -261,6 +262,16 @@ ___
 **Returns:** *number*
 
 the smallest of two components of this Vector2 instance.
+
+___
+
+#### sqrMag
+
+• **sqrMag**(): *number*
+
+**Returns:** *number*
+
+the squared length of this Vector2 instance.
 
 ___
 
