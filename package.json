@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npm run test && npm run readme && npm run compile",
     "compile": "rimraf dist && tsc",
-    "readme": "rimraf readme.md && typedoc --plugin typedoc-plugin-markdown src/index.ts --disableSources && cpy README_HEADER.md docs && concat-md --toc --decrease-title-levels --dir-name-as-title docs > README.md && rimraf docs",
+    "readme": "rimraf readme.md && typedoc --plugin typedoc-plugin-markdown --disableSources src/index.ts && cpy README_HEADER.md docs && concat-md --toc --decrease-title-levels --dir-name-as-title docs > README.md && rimraf docs",
     "test": "ts-mocha -p tsconfig.test.json test/*.*",
     "coverage": "nyc npm run test"
   },
