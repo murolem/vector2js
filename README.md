@@ -3,6 +3,7 @@
 
 
 - [Usage](#usage)
+- [*TODO*](#todo)
 - [Classes](#classes)
   - [Class: Vector2](#class-vector2)
     - [Hierarchy](#hierarchy)
@@ -35,8 +36,8 @@
 
 # Usage
 Install with npm.
-```
-npm i @aliser/vector2
+```shell
+npm install @aliser/vector2
 ```
 Import as a module.
 ```javascript
@@ -47,6 +48,12 @@ import { Vector2, RAD2DEG, DEG2RAD } from '@aliser/vector2';
 Below you can find the docs for all of this.
 
 *Note: the static and the instance methods are mixed. Sorry for that.* 
+
+# *TODO*
+- [ ] custom interpolation functions for the `static lerp` - slide with ease!
+- [ ] maybe some static damping function - it'll make the target vector experience some kind of repulsion (the magnitude of which is controller by some specified function) on approaching the end point.
+- [ ] getters for directions - up, down, right, west, east, forward, backward, sideways, the 5- and 11- dimensions and other.
+- [ ] implement the stuff that other libs like this one are providing: reflect, normal, moveTowards.
 # Classes
 
 
