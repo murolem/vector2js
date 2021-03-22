@@ -1,12 +1,10 @@
 interface IVector2 {
 	x: number,
 	y: number,
-	readonly 0: number,
-	readonly 1: number,
-	readonly u: number,
-	readonly v: number,
-
-	toString(): string;
+	0: number,
+	1: number,
+	u: number,
+	v: number,
 
 	readonly max: number;
 	readonly min: number;
@@ -15,7 +13,7 @@ interface IVector2 {
 	mag: number;
 	angle: number;
 
-	set(...args: [] | [number] | [number, number] | [Vector2]) : Vector2,
+	set(arg1?: number | Vector2, arg2?: number) : Vector2,
 	add(...args: [number] | [number, number] | [Vector2]): Vector2;
 	sub(...args: [number] | [number, number] | [Vector2]): Vector2;
 	mult(...args: [number] | [number, number] | [Vector2]): Vector2;
@@ -36,11 +34,11 @@ interface IVector2 {
 }
 
 /**
- * Multiply your radians by this to transform them to degrees.
+ * Multiply your radians by this to convert them to degrees.
  */
 export const RAD2DEG = 180 / Math.PI;
 /**
- * Multiply your degrees by this to transform them to radians.
+ * Multiply your degrees by this to convert them to radians.
  */
 export const DEG2RAD = 1 / RAD2DEG;
 
@@ -49,85 +47,90 @@ export class Vector2 implements IVector2 {
 	y!: number;
 
 	/**
-	 * Creates a new Vector2 instance with the components set to those of arguments, respectively.
+	 * Creates an instance.
 	 */
-	constructor(x: number, y: number);
+	constructor(x?: number, y?: number);
 	/**
-	 * Creates a new Vector2 instance with the components of that instance equal to the corresponding components of the given Vector2 instance, respectively.
+	 * Creates an instance, where 'x' and 'y' are both equal to 'xy'.
 	 */
-	constructor(vector: Vector2);
+	constructor(xy?: number);
 	/**
-	 * Creates a new Vector2 instance with both components of that instance equal to 'xy'.
-	 */
-	constructor(xy: number);
-	/**
-	 * Creates a new Vector2 instance with both components of that instance equal to 0.
+	 * Creates an instance, where 'x' and 'y' are both equal to 0.
 	 */
 	constructor();
-	constructor(...args: [] | [number] | [number, number] | [Vector2]) {
-		// @ts-ignore: Idk how to tell the typescript compiler that there will be maximum of 2 arguments in 'args' thing. 
+	/**
+	 * Creates an instance, where 'x' and 'y' are equal to 'x' and 'y' of 'vec', respectively.
+	 */
+	constructor(vec?: Vector2);
+	constructor(...args: any[]) {
 		this.set(...args);
 	}
 
 	/**
-	 * @returns {number} the 'x' component of this Vector2 instance.
+	 * @returns {number} alias for 'x'.
 	 */
 	get 0(): number {
 		return this.x;
 	}
+	set 0(value: number) {
+		this.x = value;
+	}
 
 	/**
-	 * @returns {number} the 'y' component of this Vector2 instance.
+	 * @returns {number} alias for 'y'.
 	 */
 	get 1(): number {
 		return this.y;
 	}
+	set 1(value: number) {
+		this.y = value;
+	}
 
 	/**
-	 * @returns {number} the 'x' component of this Vector2 instance.
+	 * @returns {number} alias for 'x'.
 	 */
 	get u(): number {
 		return this.x;
 	}
+	set u(value: number) {
+		this.x = value;
+	}
 
 	/**
-	 * @returns {number} the 'y' component of this Vector2 instance.
+	 * @returns {number} alias for 'y'.
 	 */
 	get v(): number {
 		return this.y;
 	}
-
-	/**
-	 * @returns {string} the string representation of this Vector2 instance.
-	 */
-	toString(): string {
-		return `[${this.x}, ${this.y}]`;
+	set v(value: number) {
+		this.y = value;
 	}
 
 	/**
-	 * @returns {number} the largest of two components of this Vector2 instance.
+	 * @returns {number} the largest of 'x' and 'y'.
 	 */
 	get max(): number {
 		return Math.max(this.x, this.y);
 	}
 
 	/**
-	 * @returns {number} the smallest of two components of this Vector2 instance.
+	 * @returns {number} the smallest of 'x' and 'y'.
 	 */
 	get min(): number {
 		return Math.min(this.x, this.y);
 	}
 
 	/**
-	 * @returns {number} the squared length of this Vector2 instance.
+	 * @returns {number} the length, squared.
 	 */
 	get sqrMag(): number {
 		return Math.pow(this.x, 2) + Math.pow(this.y, 2);
 	}
 
 	/**
-	 * The length of this Vector2 instance.
-	 * If negative values or values less than zero provided, then the magnitude will be set to 0.
+	 * The length.
+	 * 
+	 * Note, when setting 'mag' to negative value, both 'x' and 'y' will be set to 0, and the magnitude will be 0.
 	 */
 	get mag(): number {
 		return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
@@ -138,7 +141,7 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * The signed angle (from -PI to PI radians) of this Vector2 instance.
+	 * The signed angle (from -PI to PI radians).
 	 */
 	get angle(): number {
 		return Math.atan2(this.y, this.x);
@@ -149,57 +152,50 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Sets the both components of this Vector2 instance, respectively.
+	 * Sets 'x' and 'y', respectively.
 	 */
-	set(x: number, y: number) : Vector2;
+	set(x?: number, y?: number): Vector2;
 	/**
-	 * Sets the both components of this Vector2 instance to 'xy'.
+	 * Sets both 'x' and 'y' to 'xy'.
 	 */
-	set(xy: number) : Vector2;
+	set(xy?: number): Vector2;
 	/**
-	 * Sets the both components of this Vector2 instance to 0.
+	 * Sets both 'x' and 'y' to 0.
 	 */
-	set() : Vector2;
+	set(): Vector2;
 	/**
-	 * Sets the components of this Vector2 instance to the corresponding components of the given Vector2 instance, respectively.
+	 * Sets 'x' and 'y' to 'x' and 'y' of 'vec', respectively.
 	 */
-	set(vec: Vector2) : Vector2;
-	/** whatever */
-	set(...args: [] | [number] | [number, number] | [Vector2]) : Vector2 {
-		switch(args.length as number) {
-			case 0: 
-				this.x = 0;
-				this.y = 0;
-				break;
-			case 1: 
-				if(typeof args[0] === 'number') {
-					this.x = args[0];
-					this.y = args[0];
-				} else {
-					this.x = (args[0] as Vector2).x;
-					this.y = (args[0] as Vector2).y;
-				}
-				break;
-			default:
-				this.x = args[0] as number;
-				this.y = args[1] as number;
-				break;
+	set(vec?: Vector2): Vector2;
+	set(arg1?: number | Vector2, arg2?: number): Vector2 {
+		if(arg1 === undefined) {
+			this.x = this.y = 0;
+		} else if(typeof arg1 === 'number') {
+			if(arg2 === undefined) {
+				this.x = this.y = arg1;
+			} else {
+				this.x = arg1;
+				this.y = arg2;
+			}	
+		} else {
+			this.x = arg1.x;
+			this.y = arg1.y;
 		}
 		return this;
 	}
 
 	/**
-	 * Adds 'delta' to the both components of this Vector2 instance.
+	 * Adds 'deltaX' to both 'x' and 'y'.
 	 */
-	add(delta: number): Vector2;
+	add(deltaX: number): Vector2;
 	/**
-	 * Adds 'deltaX' and 'deltaY' to the components of this Vector2 instance, respectively.
+	 * Adds 'deltaX' and 'deltaY' to 'x' and 'y', respectively.
 	 */
 	add(deltaX: number, deltaY: number): Vector2;
 	/**
-	 * Adds to the components of this Vector2 instance the corresponding components of the given Vector2 instance, respectively.
+	 * Adds 'x' and 'y' of 'vec' to 'x' and 'y', respectively.
 	 */
-	add(vector: Vector2): Vector2;
+	add(vec: Vector2): Vector2;
 	add(...args: [number] | [number, number] | [Vector2]): Vector2 {
 		switch(args.length as number) {
 			case 1: 
@@ -220,17 +216,17 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Subtracts 'delta' from the both components of this Vector2 instance.
+	 * Subtracts 'delta' from both 'x' and 'y'.
 	 */
 	sub(delta: number): Vector2;
 	/**
-	 * Subtracts 'deltaX' and 'deltaY' from the components of this Vector2 instance, respectively.
+	 * Subtracts 'deltaX' and 'deltaY' from 'x' and 'y', respectively.
 	 */
 	sub(deltaX: number, deltaY: number): Vector2;
 	/**
-	 * Subtracts from the components of this Vector2 instance the corresponding components of the given Vector2 instance, respectively.
+	 * Subtracts 'x' and 'y' of 'vec' from 'x' and 'y', respectively.
 	 */
-	sub(vector: Vector2): Vector2;
+	sub(vec: Vector2): Vector2;
 	sub(...args: [number] | [number, number] | [Vector2]): Vector2 {
 		switch(args.length as number) {
 			case 1: 
@@ -251,17 +247,17 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Multiplies both components of this Vector2 instance by 'factor'.
+	 * Multiplies both 'x' and 'y' by 'multiplier'.
 	 */
-	mult(factor: number): Vector2;
+	mult(multiplier: number): Vector2;
 	/**
-	 * Multiplies both components of this Vector2 instance by 'factorX' and 'factorY', respectively.
+	 * Multiplies 'x' and 'y' by 'multiplierX' and 'multiplierY', respectively.
 	 */
-	mult(factorX: number, factorY: number): Vector2;
+	mult(multiplierX: number, multiplierY: number): Vector2;
 	/**
-	 * Multiplies both components of this Vector2 instance by the corresponding components of the given Vector2 instance, respectively.
+	 * Multiplies 'x' and 'y' by 'x' and 'y' of 'vec', respectively.
 	 */
-	mult(vector: Vector2): Vector2;
+	mult(vec: Vector2): Vector2;
 	mult(...args: [number] | [number, number] | [Vector2]): Vector2 {
 		switch(args.length as number) {
 			case 1: 
@@ -282,17 +278,17 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Divides both components of this Vector2 instance by 'divisor'.
+	 * Divides both 'x' and 'y' by 'divisor'.
 	 */
 	div(divisor: number): Vector2;
 	/**
-	 * Divides both components of this Vector2 instance by 'divisorX' and 'divisorY', respectively.
+	 * Divides 'x' and 'y' by 'divisorX' and 'divisorY', respectively.
 	 */
 	div(divisorX: number, divisorY: number): Vector2;
 	/**
-	 * Divides both components of this Vector2 instance by the corresponding components of the given Vector2 instance, respectively.
+	 * Divides 'x' and 'y' by 'x' and 'y' of vec, respectively.
 	 */
-	div(vector: Vector2): Vector2;
+	div(vec: Vector2): Vector2;
 	div(...args: [number] | [number, number] | [Vector2]): Vector2 {
 		switch(args.length as number) {
 			case 1: 
@@ -313,26 +309,30 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Scales this Vector2 instance so that its magnitude will be 'value'.
+	 * Function alias of 'mag'.
+	 * 
+	 * Sets the length.
+	 * 
+	 * Note, when setting 'value' is negative, both 'x' and 'y' will be set to 0, and the magnitude will be 0.
 	 */
 	setMag(value: number): Vector2;
 	/**
-	 * Scales this Vector2 instance so that its magnitude will be the same as the magnitude of the given Vector2 instance.
+	 * Sets the length to the length of `vec`.
 	 */
-	setMag(vector: Vector2): Vector2;
+	setMag(vec: Vector2): Vector2;
 	setMag(arg: number | Vector2): Vector2 {
 		this.mag = typeof arg === 'number' ? arg : (arg as Vector2).mag;
 		return this;
 	}
 
 	/**
-	 * Rotates this Vector2 instance so that its angle will be 'radians'.
+	 * Rotates this instance to 'angleInRadians' radians.
 	 */
-	rotateTo(radians: number): Vector2;
+	rotateTo(angleInRadians: number): Vector2;
 	/**
-	 * Rotates this Vector2 instance so that its angle will be the same as a the angle of the given Vector2 instance.
+	 * Rotates this instance to the angle of 'vec'.
 	 */
-	rotateTo(vector: Vector2): Vector2;
+	rotateTo(vec: Vector2): Vector2;
 	rotateTo(arg: number | Vector2): Vector2 {
 		arg = typeof arg === 'number' ? arg : (arg as Vector2).angle;
 		return this.set(
@@ -342,13 +342,13 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Rotates this Vector2 instance by 'radians'.
+	 * Rotates this instance by 'angleInRadiansDelta' radians.
 	 */
-	rotateBy(radians: number): Vector2;
+	rotateBy(angleInRadiansDelta: number): Vector2;
 	/**
-	 * Rotates this Vector2 instance by the angle of a given Vector2 instance.
+	 * Rotates this instance by the signed angle of 'vec'.
 	 */
-	rotateBy(vector: Vector2): Vector2;
+	rotateBy(vec: Vector2): Vector2;
 	rotateBy(arg: number | Vector2): Vector2 {
 		arg = typeof arg === 'number' ? arg : (arg as Vector2).angle;
 		return this.set(
@@ -358,50 +358,51 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Scales this Vector2 instance so that its magnitude will be 1.
-	 * If the magnitude of this Vector2 instance is 0, than magnitude will not be changed.
+	 * Mangles the length of this instance until it will be 1.
+	 * 
+	 * Note, if the length of this instance is 0, than it will not be changed.
 	 */
 	normalize(): Vector2 {
 		return this.mag > 0 ? this.div(this.mag) : this;
 	}
 
 	/**
-	 * Inverts both components of this Vector2 instance (changes the sign).
+	 * Inverts both 'x' and 'y' (makes them -'x' and -'y').
 	 */
 	negate(): Vector2 {
 		return this.set(-this.x, -this.y);
 	}
 
 	/**
-	 * Check if both components of this Vector2 instance are equal to the corresponding components of the given Vector2 instance, respectively.
+	 * Checks if 'x' and 'y' are strictly equal to 'x' and 'y', respectively.
 	 */
-	isEquals(vector: Vector2): boolean {
-		return this.x === vector.x && this.y === vector.y;
+	isEquals(vec: Vector2): boolean {
+		return this.x === vec.x && this.y === vec.y;
 	}
 
 	/**
-	 * @returns {Vector2} a new Vector2 instance created with both components of that instance equal to the corresponding components of this Vector2 instance, respectively. 
+	 * @returns {Vector2} a copy of this instance.
 	 */
 	copy(): Vector2 {
 		return new Vector2(this.x, this.y);
 	}
 
 	/**
-	 * Defines a range from which both components of this Vector2 instance can take a value, and tries to fit those components into this range, which starts from 0 and ends at 1.
+	 * Restricts 'x' and 'y' from going below 0 or above 1.
 	 */
 	clamp(): Vector2;
 	/**
-	 * Defines a range from which both components of this Vector2 instance can take a value, and tries to fit those components into this range, which starts from 0 and ends at 'upperBound'.
+	 * Restricts 'x' and 'y' from going below 0 or above 'upperBound'.
 	 */
 	clamp(upperBound: number): Vector2;
 	/**
-	 * Defines a range from which both components of this Vector2 instance can take a value, and tries to fit those components into this range, which starts from 'lowerBound' and ends at 'upperBound'.
+	 * Restricts 'x' and 'y' from going below 'lowerBound' or above 'upperBound'.
 	 */
 	clamp(lowerBound: number, upperBound: number): Vector2;
 	/**
-	 * Defines two ranges from which each components of this Vector2 instance can take a value, and tries to fit those components into the defined ranges, respectively: range 1 from 'lowerBoundForX' to 'upperBoundForX', range 2 from 'lowerBoundForY' to 'upperBoundForY'.
+	 * Restricts 'x' from going below 'lowerBoundX' or above 'upperBoundX', and for 'y' from going below 'lowerBoundY' or above 'upperBoundY'.
 	 */
-	clamp(lowerBoundForX: number, upperBoundForX: number, lowerBoundForY: number, upperBoundForY: number): Vector2;
+	clamp(lowerBoundX: number, upperBoundX: number, lowerBoundY: number, upperBoundY: number): Vector2;
 	clamp(...args: [] | [number] | [number, number] | [number, number, number, number]): Vector2 {
 		/* istanbul ignore next */ // idk why it's not showing up as completed branch under test coverage.
 		switch(args.length as number) {
@@ -449,7 +450,7 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Rounds both components of this Vector2 instance to the nearest integer.
+	 * Does the rounding to the nearest integer.
 	 */
 	round(): Vector2 {
 		return this.set(
@@ -459,7 +460,7 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Rounds both components of this Vector2 instance to the nearest larger integer.
+	 * Does the rounding to the nearest larger integer.
 	 */
 	ceil(): Vector2 {
 		return this.set(
@@ -469,7 +470,7 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Rounds both components of this Vector2 instance to the nearest smaller integer.
+	 * Does the rounding to the nearest smaller integer.
 	 */
 	floor(): Vector2 {
 		return this.set(
@@ -479,11 +480,11 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Divides both components of this Vector2 instance by 'divisor' and sets each component equal to a remainder of that division.
+	 * Divides both 'x' and 'y' by 'divisor' and sets them to the remainder of that division, respectively.
 	 */
 	mod(divisor: number) : Vector2;
 	/**
-	 * Divides both components of this Vector2 instance by 'divisorX' and 'divisorY', respectively, and sets each component equal to a corressponding remainder of that division.
+	 * Divides 'x' and 'y' by 'divisorX' and 'divisorY', respectively, and sets them to the remainder of that division, also respectively.
 	 */
 	mod(divisorX: number, divisorY: number): Vector2;
 	mod(...args: [number] | [number, number]): Vector2 {
@@ -502,104 +503,118 @@ export class Vector2 implements IVector2 {
 	}
 
 	/**
-	 * Linearly interpolates between the two given Vector2 instances by 't'. 
+	 * Linearly interpolates between 'vec1' and 'vec2' by 't', setting this instance to result. 
 	 */
-	lerp(vector1: Vector2, vector2: Vector2, t: number): Vector2 {
-		return Vector2.lerp(this, vector1, vector2, t);
+	lerp(vec1: Vector2, vec2: Vector2, t: number): Vector2 {
+		return Vector2.lerp(this, vec1, vec2, t);
 	}
 
 	/**
-	 * Adds the given Vector2 instances together and returns new Vector2 instance containing the result.
+	 * Adds 'vecs' together.
 	 */
-	static add(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
-		return vectors.slice(1).reduce((accum, vector) => accum.add(vector), vectors[0].copy());
+	static add(...vecs: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vecs.slice(1).reduce((accum, vector) => accum.add(vector), vecs[0].copy());
 	}
 	
 	/**
-	 * Sequentially subtracts all the given Vector2 instances and returns new Vector2 instance containing the result.
+	 * Sequentially subtracts 'vecs', one by one.
 	 */
-	static sub(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
-		return vectors.slice(1).reduce((accum, vector) => accum.sub(vector), vectors[0].copy());
+	static sub(...vecs: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vecs.slice(1).reduce((accum, vector) => accum.sub(vector), vecs[0].copy());
 	}
 
 	/**
-	 * Multiplies the given Vector2 instances together and returns new Vector2 instance containing the result.
+	 * Multiplies 'vecs' together.
 	 */
-	static mult(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
-		return vectors.slice(1).reduce((accum, vector) => accum.mult(vector), vectors[0].copy());
+	static mult(...vecs: [Vector2, Vector2, ...Vector2[]]): Vector2 {
+		return vecs.slice(1).reduce((accum, vector) => accum.mult(vector), vecs[0].copy());
 	}
 
 	/**
-	 * Sequentially divides the given Vector2 instances and returns new Vector2 instance containing the result.
+	 * Sequentially divides 'vecs', one by one.
 	 */
 	static div(...vectors: [Vector2, Vector2, ...Vector2[]]): Vector2 {
 		return vectors.slice(1).reduce((accum, vector) => accum.div(vector), vectors[0].copy());
 	}
 
 	/**
-	 * @returns {number} the distance between the two given Vector2 instances.
+	 * @returns {number} the distance between 'vec1' and 'vec2'.
 	 */
-	static dist(vector1: Vector2, vector2: Vector2): number {
-		return Math.hypot(vector2.x - vector1.x, vector2.y - vector1.y);
+	static dist(vec1: Vector2, vec2: Vector2): number {
+		return Math.hypot(vec2.x - vec1.x, vec2.y - vec1.y);
 	}
 
 	/**
-	 * @returns {Vector2} a new Vector2 instance with angle equal to 'angle' (in radians) and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1. 
+	 * @returns {Vector2} a new instance with angle 'angleOfRadians' radians and length 'length'.
 	 */
-	static fromAngle(angle: number, magnitude = 1): Vector2 {
-		return magnitude <= 0 
+	static fromAngle(angleOfRadians: number, length = 1): Vector2 {
+		return length <= 0 
 			? new Vector2()
 			: new Vector2(
-				Math.cos(angle) * magnitude,
-				Math.sin(angle) * magnitude
+				Math.cos(angleOfRadians) * length,
+				Math.sin(angleOfRadians) * length
 			);
 	}
 
 	/**
-	 * @returns {number} an unsigned angle (from 0 to PI radians) between the two given Vector2 instances.
+	 * @returns {number} an unsigned angle (from 0 to PI radians) between 'vec1' and 'vec2'.
 	 */
-	static angleBetween(vector1: Vector2, vector2: Vector2): number {
-		return Math.acos((vector1.x * vector2.x + vector1.y * vector2.y) / (Math.sqrt(Math.pow(vector1.x, 2) + Math.pow(vector1.y, 2)) * Math.sqrt(Math.pow(vector2.x, 2) + Math.pow(vector2.y, 2))));
+	static angleBetween(vec1: Vector2, vec2: Vector2): number {
+		return Math.acos(
+			(vec1.x * vec2.x + vec1.y * vec2.y) / (Math.sqrt(Math.pow(vec1.x, 2) 
+			+ Math.pow(vec1.y, 2)) * Math.sqrt(Math.pow(vec2.x, 2) + Math.pow(vec2.y, 2))));
 	}
 
 	/**
-	 * @returns {number} the smallest signed angle (from -PI to PI radians) between the two given Vector2 instances. 
-	 * The resulting angle is the angle that, if applied as a rotation to the vector 'vector1', will result in the 'vector2'.
+	 * @returns {number} the smallest signed angle (from -PI to PI radians) between 'vec1' and 'vec2'.
+	 * 
+	 * Note, that the resulting angle is the angle that, if applied as a rotation to 'vec1', will result in 'vec2'.
 	 */
-	static angleBetweenSigned(vector1: Vector2, vector2: Vector2): number {
-		const tempMess = vector2.angle - vector1.angle;
+	static angleBetweenSigned(vec1: Vector2, vec2: Vector2): number {
+		const tempMess = vec2.angle - vec1.angle;
 		return Math.abs(tempMess) > Math.PI ? (Math.PI * 2 - Math.abs(tempMess)) * -Math.sign(tempMess) : tempMess;
 	}
 
 	/**
-	 * @returns {number} the dot product of the two given Vector2 instances.
+	 * @returns {number} the dot product of 'vec1' and 'vec2'.
 	 */
-	static dot(vector1: Vector2, vector2: Vector2): number {
-		return vector1.mag * vector2.mag * Math.cos(Vector2.angleBetween(vector1, vector2));
+	static dot(vec1: Vector2, vec2: Vector2): number {
+		return vec1.mag * vec2.mag * Math.cos(Vector2.angleBetween(vec1, vec2));
 	}
 
 	/**
-	 * Linearly interpolates between the two given Vector2 instances by 't'. 
-	 * Result both is stored in the provied by user 'vectorOut' Vector2 instance and returned by the function. 
+	 * Linearly interpolates between 'vec1' and 'vec2' by 't', setting 'vecOut' to result. 
+	 * 
+	 * @returns {Vector2} 'vecOut'.
 	 */
-	static lerp(vectorOut: Vector2, vector1: Vector2, vector2: Vector2, t: number): Vector2 {
-		return vectorOut.set(
-			vector1.x + (vector2.x - vector1.x) * t,
-			vector1.y + (vector2.y - vector1.y) * t
+	static lerp(vecOut: Vector2, vec1: Vector2, vec2: Vector2, t: number): Vector2 {
+		return vecOut.set(
+			vec1.x + (vec2.x - vec1.x) * t,
+			vec1.y + (vec2.y - vec1.y) * t
 		);
 	}
 
 	/**
-	 * @returns {Vector2} a new Vector2 instance with both its components set to 0.
+	 * @returns {Vector2} a new instance with both 'x' and 'y' set to 0.
 	 */
 	static zero(): Vector2 {
 		return new Vector2();
 	}
 
 	/**
-	 * @returns {Vector2} a new Vector2 instance with a random angle and, if specified, magnitude 'magnitude' - otherwise sets the magnitude equal to 1. 
+	 * @returns {Vector2} a new instance with 'x' and 'y' individually set to some random value in such a way that the length of the new instance will be 'length'.
 	 */
-	static random(magnitude = 1): Vector2 {
-		return Vector2.fromAngle(Math.random() * Math.PI * 2, magnitude);
+	static randomWithLength(length = 1): Vector2 {
+		return Vector2.fromAngle(Math.random() * Math.PI * 2, length);
+	}
+
+	/**
+ 	* @returns {Vector2} a new instance with 'x' and 'y' individually set to some random value from -1 to below 1, multiplied by 'multiplier'.
+ 	*/
+	static random(multiplier = 1): Vector2 {
+		return new Vector2(
+			(Math.random() * 2 - 1) * multiplier,
+			(Math.random() * 2 - 1) * multiplier
+		);
 	}
 }
