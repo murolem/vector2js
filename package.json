@@ -1,6 +1,6 @@
 {
   "name": "@aliser/vector2",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Some basic functionality to represent and work with 2D vectors.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

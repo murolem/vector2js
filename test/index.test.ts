@@ -59,10 +59,49 @@ describe('Vector2', function() {
 			});
 		});
 
+		describe('x/y aliases', function() {
+			describe('u/v aliases', function() {
+				it('should set \'x\' when setting through \'u\'', function() {
+					const vec = new Vector2();
+					vec.u = 42;
+					assert.strictEqual(vec.x, 42);
+				});
+
+				it('should get \'x\' when getting with \'u\'', function() {
+					const vec = new Vector2(42, 0);
+					assert.strictEqual(vec.u, 42);
+				});
+
+				it('should set \'y\' when setting through \'v\'', function() {
+					const vec = new Vector2();
+					vec.v = 42;
+					assert.strictEqual(vec.y, 42);
+				});
+
+				it('should get \'y\' when getting with \'v\'', function() {
+					const vec = new Vector2(0, 42);
+					assert.strictEqual(vec.v, 42);
+				});
+			});
+		});
+
 		describe('#[index signatures]', function() {
+			it('should set the \'x\' component of the currently tested Vector2 instance when refered to the index signature \'[0]\'.', function() {
+				const vector = new Vector2();
+				vector[0] = 123;
+				assert.strictEqual(vector.x, 123);
+			});
+
 			it('should return the \'x\' component of the currently tested Vector2 instance when refered to the index signature \'[0]\'.', function() {
 				const vector = new Vector2(...generateVectorComponents());
 				assert.strictEqual(vector.x, vector[0]);
+			});
+
+
+			it('should set the \'y\' component of the currently tested Vector2 instance when refered to the index signature \'[1]\'.', function() {
+				const vector = new Vector2();
+				vector[1] = 123;
+				assert.strictEqual(vector.y, 123);
 			});
 
 			it('should return the \'y\' component of the currently tested Vector2 instance when refered to the index signature \'[1]\'.', function() {
@@ -177,13 +216,6 @@ describe('Vector2', function() {
 				vector.div(vectorAnother);
 				assert.strictEqual(vector.x, 20);
 				assert.strictEqual(vector.y, 3);
-			});
-		});
-
-		describe('#toString()', function() {
-			it('should return a string representation of the currently tested Vector2 instance.', function() {
-				const vector = new Vector2(...generateVectorComponents());
-				assert.strictEqual(vector.toString(), `[${vector.x}, ${vector.y}]`);
 			});
 		});
 
@@ -706,16 +738,16 @@ describe('Vector2', function() {
 			});
 		});
 
-		describe('random()', function() {
+		describe('randomWithLength()', function() {
 			it('should generate a new Vector2 instance which meets the critera of a random unit vector, magnitude is unspecified; checking magnitude.', function() {
-				const vector = Vector2.random();
+				const vector = Vector2.randomWithLength();
 				fuzzyEqual(vector.mag, 1, errorMargin);
 			});
 
 			it('should generate a new Vector2 instance which meets the critera of a random unit vector, magnitude is unspecified; checking angles.', function() {
 				const angleSectionsOfPiDiv4Times4Used = {};
 				for(let i = 0; i < 100; i++) {
-					const vector = Vector2.random();
+					const vector = Vector2.randomWithLength();
 					angleSectionsOfPiDiv4Times4Used[vector.angle >= 0
 						? vector.angle <= Math.PI / 2 
 							? 0
@@ -726,6 +758,14 @@ describe('Vector2', function() {
 					fuzzyEqual(vector.mag, 1, errorMargin);
 				}
 				assert.strictEqual(Object.keys(angleSectionsOfPiDiv4Times4Used).length, 4);
+			});
+		});
+
+		describe('random()', function() {
+			it('should generate a new instance within constrains', function() {
+				const vec = Vector2.random();
+				fuzzyEqual(vec.x, 0, 2);
+				fuzzyEqual(vec.y, 0, 2);
 			});
 		});
 	});
